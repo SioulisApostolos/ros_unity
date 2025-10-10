@@ -20,7 +20,7 @@ public class BiopsyClickManager : MonoBehaviour
     public CoordinatesPublisher coordinatesPublisher; 
     private GameObject currentBiopsyDot;
     private GameObject currentEntryDot;
-    private LineRenderer lineRenderer;
+    //private LineRenderer lineRenderer;
 
     private bool waitingForEntryPoint = false;
 
@@ -37,14 +37,14 @@ public class BiopsyClickManager : MonoBehaviour
             Debug.LogWarning("Brain collider not assigned!");
 
         // == Line Renderer setup
-        GameObject lineObj = new GameObject("BiopsyEntryLine");
-        lineRenderer = lineObj.AddComponent<LineRenderer>();
-        lineRenderer.startWidth = 0.005f;
-        lineRenderer.endWidth = 0.005f;
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        lineRenderer.positionCount = 0;
-        lineRenderer.startColor = Color.red;
-        lineRenderer.endColor = Color.red;
+       // GameObject lineObj = new GameObject("BiopsyEntryLine");
+        //lineRenderer = lineObj.AddComponent<LineRenderer>();
+        ///lineRenderer.startWidth = 0.005f;
+        //lineRenderer.endWidth = 0.005f;
+        ///lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        //lineRenderer.positionCount = 0;
+        //lineRenderer.startColor = Color.red;
+        //lineRenderer.endColor = Color.red;
 
         CreateCanvasAndButtons();
         SetButtonsActive(false);
@@ -87,7 +87,7 @@ public class BiopsyClickManager : MonoBehaviour
                         entryPoint = hit.point;
                         Debug.Log("Entry point selected at: " + entryPoint.Value);
                         ShowEntryDot(entryPoint.Value);
-                        DrawLine();
+                        //DrawLine();
 
                         waitingForEntryPoint = false;
 
@@ -132,7 +132,7 @@ public class BiopsyClickManager : MonoBehaviour
             if (currentEntryDot != null)
                 Destroy(currentEntryDot);
 
-            lineRenderer.positionCount = 0;
+            ///lineRenderer.positionCount = 0;
 
             // == Hide slice quads after target selection
             SetSlicesVisible(false);
@@ -176,14 +176,14 @@ public class BiopsyClickManager : MonoBehaviour
         currentEntryDot.GetComponent<Renderer>().material = redMat;
     }
 
-    void DrawLine()
-    {
-        if (!entryPoint.HasValue || currentBiopsyDot == null) return;
+    //void DrawLine()
+    //{
+      //  if (!entryPoint.HasValue || currentBiopsyDot == null) return;
 
-        lineRenderer.positionCount = 2;
-        lineRenderer.SetPosition(0, entryPoint.Value);
-        lineRenderer.SetPosition(1, currentBiopsyDot.transform.position);
-    }
+        //lineRenderer.positionCount = 2;
+        //lineRenderer.SetPosition(0, entryPoint.Value);
+        //lineRenderer.SetPosition(1, currentBiopsyDot.transform.position);
+    //}
         //function which handles the publish to ros
     void PublishPointsToROS()
     {
@@ -275,7 +275,7 @@ public class BiopsyClickManager : MonoBehaviour
             Destroy(currentEntryDot);
         entryPoint = null;
 
-        lineRenderer.positionCount = 0;
+        //lineRenderer.positionCount = 0;
 
         if (brainCollider != null)
             brainCollider.enabled = true;
@@ -300,7 +300,7 @@ public class BiopsyClickManager : MonoBehaviour
             Destroy(currentEntryDot);
         entryPoint = null;
 
-        lineRenderer.positionCount = 0;
+        //lineRenderer.positionCount = 0;
 
         if (brainCollider != null)
             brainCollider.enabled = false;
